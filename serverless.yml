@@ -12,9 +12,6 @@
 # Happy Coding!
 
 service: serverless-s3imageupload
-# app and org for use with dashboard.serverless.com
-#app: your-app-name
-#org: your-org-name
 
 frameworkVersion: '3'
 
@@ -34,21 +31,22 @@ provider:
             - 's3:*'
           Resource: '*'
 
+  # environment variables
+  environment:
+    REGION: ${self:provider.region}
+    IMAGE_UPLOAD_BUCKET: ${self:custom.imageUploadBucket}
+
 custom:
   imageUploadBucket: ${self:service}-${self:provider.stage}-29052023
-
-# environment variables
-environment:
-  REGION: ${self:provider.region}
-  imageUploadBucket: ${self:custom.imageUploadBucket}
 
 functions:
   imageUpload:
     handler: src/functions/imageUpload.handler
     events:
-      - httpApi:
-          path: image-upload
-          method: GET
+      - http:
+          path: /image-upload
+          method: POST
+          cors: true
 
 resources:
   Resources:
@@ -57,19 +55,26 @@ resources:
       Properties:
         BucketName: ${self:custom.imageUploadBucket}
 
-    # https://repost.aws/knowledge-center/s3-bucket-policy-for-config-rule
-    S3AccessPolicy:
+        # Granting public access to bucket
+        # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket.html#aws-properties-s3-bucket--examples
+        PublicAccessBlockConfiguration:
+          BlockPublicAcls: false
+          BlockPublicPolicy: false
+          IgnorePublicAcls: false
+          RestrictPublicBuckets: false
+
+    ImageUploadBucketPolicy:
       Type: AWS::S3::BucketPolicy
       Properties:
         Bucket: !Ref ImageUploadBucket
         PolicyDocument:
           Version: '2008-10-17'
           Statement:
-            - Sid: AllowPublicAccess
+            - Sid: AllowPublicReadAccess
               Effect: Allow
               Principal: '*'
-              Action: s3:GetObject
+              Action: 's3:GetObject'
               Resource: arn:aws:s3:::${self:custom.imageUploadBucket}/*
               Condition:
                 Bool:
-                  aws:SecureTransport: 'true'
+                  aws:SecureTransport: 'true' # https://repost.aws/knowledge-center/s3-bucket-policy-for-config-rule

@@ -1,4 +1,4 @@
-export const Responses = {
+const Responses = {
   _200(data = {}) {
     return {
       headers: {
@@ -35,3 +35,5 @@ export const Responses = {
     };
   },
 };
+
+export default Responses;

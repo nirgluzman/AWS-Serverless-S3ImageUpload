@@ -1,0 +1,10 @@
+@url = https://71in19ue6f.execute-api.us-east-1.amazonaws.com/dev
+
+###
+POST {{url}}/image-upload
+Content-Type: application/json
+
+{
+    "image": "abc",
+    "mime": "123"
+}

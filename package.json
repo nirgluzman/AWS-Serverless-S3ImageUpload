@@ -11,6 +11,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "file-type": "^18.4.0"
+    "file-type": "^18.4.0",
+    "uuid": "^9.0.0"
   }
 }
