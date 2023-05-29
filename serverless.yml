@@ -1,0 +1,74 @@
+# Welcome to Serverless!
+#
+# This file is the main config file for your service.
+# It's very minimal at this point and uses default values.
+# You can always add more config options for more control.
+# We've included some commented out config examples here.
+# Just uncomment any of them to get that config option.
+#
+# For full config options, check the docs:
+#    docs.serverless.com
+#
+# Happy Coding!
+
+service: serverless-s3imageupload
+# app and org for use with dashboard.serverless.com
+#app: your-app-name
+#org: your-org-name
+
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  profile: serverlessUser
+  runtime: nodejs18.x
+  region: ${opt:region, 'us-east-1'}
+  stage: ${opt:stage, 'dev'}
+
+  # Lambda function's IAM Role
+  iam:
+    role:
+      statements:
+        - Effect: 'Allow'
+          Action:
+            - 's3:*'
+          Resource: '*'
+
+custom:
+  imageUploadBucket: ${self:service}-${self:provider.stage}-29052023
+
+# environment variables
+environment:
+  imageUploadBucket: ${self:custom.imageUploadBucket}
+
+functions:
+  imageUpload:
+    handler: src/functions/imageUpload.handler
+    events:
+      - httpApi:
+          path: image-upload
+          method: GET
+
+resources:
+  Resources:
+    ImageUploadBucket:
+      Type: AWS::S3::Bucket
+      Properties:
+        BucketName: ${self:custom.imageUploadBucket}
+
+    # https://repost.aws/knowledge-center/s3-bucket-policy-for-config-rule
+    S3AccessPolicy:
+      Type: AWS::S3::BucketPolicy
+      Properties:
+        Bucket: !Ref ImageUploadBucket
+        PolicyDocument:
+          Version: '2008-10-17'
+          Statement:
+            - Sid: AllowPublicAccess
+              Effect: Allow
+              Principal: '*'
+              Action: s3:GetObject
+              Resource: arn:aws:s3:::${self:custom.imageUploadBucket}/*
+              Condition:
+                Bool:
+                  aws:SecureTransport: 'true'
