@@ -39,6 +39,7 @@ custom:
 
 # environment variables
 environment:
+  REGION: ${self:provider.region}
   imageUploadBucket: ${self:custom.imageUploadBucket}
 
 functions:

@@ -1,0 +1,16 @@
+{
+  "name": "s3upload",
+  "version": "1.0.0",
+  "description": "Image upload API to S3 bucket",
+  "type": "module",
+  "main": "imageUpload.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "file-type": "^18.4.0"
+  }
+}
