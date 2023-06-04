@@ -1,6 +1,8 @@
 // https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-s3/
 // https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-s3/classes/putobjectcommand.html
 import { S3Client, PutObjectCommand } from '@aws-sdk/client-s3';
+
+// Create S3 service object
 const s3Client = new S3Client({ region: process.env.REGION });
 
 import Responses from '../common/API_Responses.js';
@@ -39,7 +41,7 @@ export const handler = async (event) => {
     }
 
     const name = uuid();
-    const key = `${name}.${detectedExt}`;
+    const key = `uploads/${name}.${detectedExt}`;
 
     console.log(
       `writing image to bucket ${process.env.IMAGE_UPLOAD_BUCKET} with key ${key}`

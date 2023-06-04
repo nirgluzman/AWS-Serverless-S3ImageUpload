@@ -1,7 +1,7 @@
 {
   "name": "s3upload",
   "version": "1.0.0",
-  "description": "Image upload API to S3 bucket",
+  "description": "Image upload & resize API to S3 bucket",
   "type": "module",
   "main": "imageUpload.js",
   "scripts": {
@@ -12,6 +12,7 @@
   "license": "ISC",
   "dependencies": {
     "file-type": "^18.4.0",
+    "jimp": "^0.22.8",
     "uuid": "^9.0.0"
   }
 }
