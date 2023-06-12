@@ -8,6 +8,8 @@ https://www.youtube.com/watch?v=GBn5zi_Hhqk&list=PLmexTtcbIn_gP8bpsUsHfv-58KsKPs
 https://www.youtube.com/watch?v=cq-FeN48SCw&list=PLmexTtcbIn_gP8bpsUsHfv-58KsKPsGEo&index=29   (image resize)
 https://www.youtube.com/watch?v=rIQM30rz_0c&list=PLmexTtcbIn_gP8bpsUsHfv-58KsKPsGEo&index=40   (S3 pre-signed URL)
 
+https://www.youtube.com/watch?v=vNCNLhc7-6U&list=PLmexTtcbIn_gP8bpsUsHfv-58KsKPsGEo&index=47   (CI/CD with GitHub Actions)
+
 Image Upload Test Website:
 https://sls-image-upload-test-bucket.s3-eu-west-1.amazonaws.com/index.html
 
@@ -25,3 +27,5 @@ S3 Pre-Signed URL
 https://docs.aws.amazon.com/AmazonS3/latest/userguide/example_s3_Scenario_PresignedUrl_section.html
 https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/modules/_aws_sdk_s3_request_presigner.html
 
+Serverless GitHub Actions:
+https://github.com/serverless/github-action
