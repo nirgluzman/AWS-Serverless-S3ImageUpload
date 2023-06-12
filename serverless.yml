@@ -17,7 +17,7 @@ frameworkVersion: '3'
 
 provider:
   name: aws
-  profile: serverlessUser
+  # profile: serverlessUser # not required with GitHub Actions
   runtime: nodejs18.x
   region: ${opt:region, 'us-east-1'}
   stage: ${opt:stage, 'dev'}
