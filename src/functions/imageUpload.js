@@ -1,11 +1,5 @@
-// https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-s3/
-// https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-s3/classes/putobjectcommand.html
-import { S3Client, PutObjectCommand } from '@aws-sdk/client-s3';
-
-// Create S3 service object
-const s3Client = new S3Client({ region: process.env.REGION });
-
 import Responses from '../common/API_Responses.js';
+import S3 from '../common/S3.js';
 
 import { fileTypeFromBuffer } from 'file-type';
 import { v4 as uuid } from 'uuid';
@@ -47,20 +41,20 @@ export const handler = async (event) => {
       `writing image to bucket ${process.env.IMAGE_UPLOAD_BUCKET} with key ${key}`
     );
 
-    const input = {
-      // PutObjectRequest
-      Bucket: process.env.IMAGE_UPLOAD_BUCKET,
-      Body: buffer,
-      Key: key,
-      ContentType: body.mime,
-    };
+    await S3.write(process.env.IMAGE_UPLOAD_BUCKET, key, buffer, body.mime);
 
-    const command = new PutObjectCommand(input);
-    await s3Client.send(command);
+    // const url = `https://${process.env.IMAGE_UPLOAD_BUCKET}.s3.${process.env.REGION}.amazonaws.com/${key}`;
 
-    const url = `https://${process.env.IMAGE_UPLOAD_BUCKET}.s3.${process.env.REGION}.amazonaws.com/${key}`;
+    const url = await S3.getPreSignedURL(
+      process.env.IMAGE_UPLOAD_BUCKET,
+      key,
+      30
+    );
 
-    return Responses._200({ message: 'image uploaded', imageURL: url });
+    return Responses._200({
+      message: 'image uploaded',
+      imageURL: url,
+    });
   } catch (error) {
     // error handling
     console.error(error);

@@ -7,6 +7,8 @@ import {
   GetObjectCommand,
 } from '@aws-sdk/client-s3';
 
+import { getSignedUrl } from '@aws-sdk/s3-request-presigner';
+
 // Create S3 service object
 const s3Client = new S3Client({ region: process.env.REGION });
 
@@ -32,6 +34,12 @@ const S3 = {
     };
     const command = new PutObjectCommand(input);
     return s3Client.send(command);
+  },
+
+  // Pre-signed URLs are used to provide short-term access to a private object in S3 bucket.
+  getPreSignedURL(bucket, fileName, expirySeconds) {
+    const command = new GetObjectCommand({ Bucket: bucket, Key: fileName });
+    return getSignedUrl(s3Client, command, { expiresIn: expirySeconds });
   },
 };
 

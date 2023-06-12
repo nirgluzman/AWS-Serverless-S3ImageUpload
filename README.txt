@@ -1,8 +1,12 @@
+GitHub repo:
+git@github.com:nirgluzman/AWS-Serverless-S3ImageUpload.git
 
 Source - The Serverless Framework with AWS - Image upload API to S3 bucket:
 https://www.youtube.com/@CompleteCoding
+
 https://www.youtube.com/watch?v=GBn5zi_Hhqk&list=PLmexTtcbIn_gP8bpsUsHfv-58KsKPsGEo&index=25   (image upload)
 https://www.youtube.com/watch?v=cq-FeN48SCw&list=PLmexTtcbIn_gP8bpsUsHfv-58KsKPsGEo&index=29   (image resize)
+https://www.youtube.com/watch?v=rIQM30rz_0c&list=PLmexTtcbIn_gP8bpsUsHfv-58KsKPsGEo&index=40   (S3 pre-signed URL)
 
 Image Upload Test Website:
 https://sls-image-upload-test-bucket.s3-eu-west-1.amazonaws.com/index.html
@@ -17,5 +21,7 @@ https://github.com/aws/aws-cdk/issues/25358
 Jimp - JavaScript image processing library
 https://www.npmjs.com/package/jimp
 
-GitHub repo:
-git@github.com:nirgluzman/AWS-Serverless-S3ImageUpload.git
+S3 Pre-Signed URL
+https://docs.aws.amazon.com/AmazonS3/latest/userguide/example_s3_Scenario_PresignedUrl_section.html
+https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/modules/_aws_sdk_s3_request_presigner.html
+
