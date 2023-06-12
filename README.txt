@@ -28,4 +28,5 @@ https://docs.aws.amazon.com/AmazonS3/latest/userguide/example_s3_Scenario_Presig
 https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/modules/_aws_sdk_s3_request_presigner.html
 
 Serverless GitHub Actions:
+https://completecoding.io/serverless-cicid-github-actions/
 https://github.com/serverless/github-action
